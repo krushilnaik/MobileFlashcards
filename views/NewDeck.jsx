@@ -43,7 +43,7 @@ function NewDeck() {
 
 			<View style={{ position: 'relative', top: '60%' }}>
 				<TouchableOpacity style={styles.button} onPress={submit}>
-					<Text style={styles.buttonText}>Create Deck</Text>
+					<Text style={styles.buttonText}>Submit</Text>
 				</TouchableOpacity>
 			</View>
 		</KeyboardAvoidingView>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
 	button: {
 		padding: 20,
 		borderRadius: 7,
-		backgroundColor: 'darkslategray'
+		backgroundColor: 'black'
 	},
 	buttonText: {
 		color: 'white',
