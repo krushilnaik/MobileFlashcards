@@ -83,9 +83,7 @@ function Quiz() {
 				<Text style={styles.card}>{quiz.questions[0][question ? 'question' : 'answer']}</Text>
 
 				<TouchableOpacity onPress={() => setQuestion(!question)}>
-					<Text style={[styles.text, { color: 'coral' }]}>
-						{question ? 'View Answer' : ' View Question'}
-					</Text>
+					<Text style={[styles.text, { color: 'coral' }]}>{question ? 'Answer' : ' Question'}</Text>
 				</TouchableOpacity>
 			</View>
 
@@ -130,7 +128,7 @@ const styles = StyleSheet.create({
 	},
 	card: {
 		fontWeight: 'bold',
-		fontSize: 28,
+		fontSize: 36,
 		textAlign: 'center'
 	}
 });

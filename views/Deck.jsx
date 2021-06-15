@@ -29,8 +29,8 @@ function Deck() {
 	return (
 		<View style={styles.layout}>
 			<View style={{ alignItems: 'center', position: 'relative', top: '8%' }}>
-				<Text style={{ fontSize: 24 }}>{deck.title}</Text>
-				<Text>{deck.questions.length} card(s)</Text>
+				<Text style={{ fontSize: 36 }}>{deck.title}</Text>
+				<Text style={{ fontSize: 24, color: 'gray' }}>{deck.questions.length} card(s)</Text>
 			</View>
 
 			<View style={{ position: 'relative', top: '50%' }}>
@@ -38,11 +38,11 @@ function Deck() {
 					style={styles.button}
 					onPress={() => navigation.navigate('NewQuestion', { id })}
 				>
-					<Text style={[styles.buttonText, { color: 'darkslategray' }]}>Add Card</Text>
+					<Text style={[styles.buttonText, { color: 'black' }]}>Add Card</Text>
 				</TouchableOpacity>
 
 				<TouchableOpacity
-					style={[styles.button, { backgroundColor: 'darkslategray' }]}
+					style={[styles.button, { backgroundColor: 'black' }]}
 					onPress={() => navigation.navigate('Quiz', { id })}
 				>
 					<Text style={styles.buttonText}>Start Quiz</Text>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 	button: {
 		padding: 20,
 		borderRadius: 7,
-		borderColor: 'darkslategray',
+		borderColor: 'black',
 		borderWidth: 2,
 		marginBottom: 10
 	},
