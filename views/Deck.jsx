@@ -1,36 +1,78 @@
+import { useNavigation, useRoute } from '@react-navigation/native';
+import AppLoading from 'expo-app-loading';
 import React from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteDeckAsync } from '../store/reducers/deck.reducer';
 
-/**
- *
- * @param {{
- * 	deckID: string
- * }} props
- * @returns
- */
-function Deck(props) {
-	const deckTitle = 'Deck1';
-	const deck = [
-		{ q: 'q1', a: 'a1' },
-		{ q: 'q2', a: 'a2' },
-		{ q: 'q3', a: 'a3' },
-		{ q: 'q4', a: 'a4' }
-	];
+function Deck() {
+	const dispatch = useDispatch();
+	const navigation = useNavigation();
+	const route = useRoute();
 
-	const deleteDeck = () => {};
-	const addCard = () => {};
-	const startQuiz = () => {};
+	// @ts-ignore
+	const { id } = route.params;
+
+	// @ts-ignore
+	const deck = useSelector(state => state.decks[id]);
+
+	const deleteDeck = () => {
+		dispatch(deleteDeckAsync(id));
+
+		navigation.goBack();
+	};
+
+	if (!deck) {
+		return <AppLoading />;
+	}
 
 	return (
-		<View>
-			<Text>{deckTitle}</Text>
-			<Text>{`${deck.length} cards`}</Text>
+		<View style={styles.layout}>
+			<View style={{ alignItems: 'center', position: 'relative', top: '8%' }}>
+				<Text style={{ fontSize: 24 }}>{deck.title}</Text>
+				<Text>{deck.questions.length} card(s)</Text>
+			</View>
 
-			<Button title='Add Card' onPress={addCard} color='white' />
-			<Button title='Start Quiz' onPress={startQuiz} color='black' />
-			<Button title='Delete Deck' onPress={deleteDeck} />
+			<View style={{ position: 'relative', top: '50%' }}>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => navigation.navigate('NewQuestion', { id })}
+				>
+					<Text style={[styles.buttonText, { color: 'darkslategray' }]}>Add Card</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					style={[styles.button, { backgroundColor: 'darkslategray' }]}
+					onPress={() => navigation.navigate('Quiz', { id })}
+				>
+					<Text style={styles.buttonText}>Start Quiz</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity onPress={deleteDeck}>
+					<Text style={[styles.buttonText, { color: 'crimson' }]}>Delete Deck</Text>
+				</TouchableOpacity>
+			</View>
 		</View>
 	);
 }
+
+const styles = StyleSheet.create({
+	layout: {
+		flex: 1,
+		padding: 20
+	},
+	button: {
+		padding: 20,
+		borderRadius: 7,
+		borderColor: 'darkslategray',
+		borderWidth: 2,
+		marginBottom: 10
+	},
+	buttonText: {
+		color: 'white',
+		fontSize: 22,
+		textAlign: 'center'
+	}
+});
 
 export default Deck;

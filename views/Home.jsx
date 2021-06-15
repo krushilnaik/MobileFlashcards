@@ -1,7 +1,6 @@
 import { FontAwesome } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import DeckList from './DeckList';
 import NewDeck from './NewDeck';
 
@@ -14,22 +13,18 @@ function Home() {
 				name='Decks'
 				component={DeckList}
 				options={{
-					tabBarIcon: () => <FontAwesome name='bookmark' style={styles.tabIconLayout} size={36} />
+					tabBarIcon: ({ color }) => <FontAwesome name={'bookmark'} size={30} color={color} />
 				}}
 			/>
 			<Tab.Screen
 				name='Add Deck'
 				component={NewDeck}
 				options={{
-					tabBarIcon: () => <FontAwesome name='plus-square' style={styles.tabIconLayout} size={36} />
+					tabBarIcon: ({ color }) => <FontAwesome name='plus-square' size={30} color={color} />
 				}}
 			/>
 		</Tab.Navigator>
 	);
 }
-
-const styles = StyleSheet.create({
-	tabIconLayout: { display: 'flex', flexDirection: 'column' }
-});
 
 export default Home;

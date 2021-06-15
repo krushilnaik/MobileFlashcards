@@ -1,52 +1,79 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput, Button } from 'react-native';
-import { addEntry } from '../api/actions/deck.actions';
-import { addDeckTitle } from '../api/utils/util';
+import { Text, View, StyleSheet, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { addDeckAsync } from '../store/reducers/deck.reducer';
+import { useNavigation } from '@react-navigation/native';
 
-function NewDeck(props) {
+function NewDeck() {
+	const dispatch = useDispatch();
+	const navigation = useNavigation();
+
 	const [deckTitle, setDeckTitle] = useState('');
-	const { dispatch, navigation } = props;
+	const [error, setError] = useState(false);
 
-	const addDeck = () => {
+	const submit = () => {
 		if (deckTitle) {
-			const { titleId, deck } = addDeckTitle(deckTitle);
+			dispatch(addDeckAsync(deckTitle));
 
-			dispatch(addEntry(deck));
+			setDeckTitle('');
 
-			navigation.navigate('ViewDeck', {
-				deckId: titleId,
-				deck: deck[titleId]
-			});
+			navigation.navigate('Deck', { id: deckTitle });
+		} else {
+			setError(true);
 		}
 	};
 
 	return (
 		<KeyboardAvoidingView behavior='padding' style={styles.layout}>
 			<View>
-				<Text>What is the title of your new deck?</Text>
-				<TextInput
-					placeholder='Deck Title'
-					defaultValue={deckTitle}
-					onChange={event => {
-						setDeckTitle(event.currentTarget.toString());
-					}}
-				/>
+				<Text style={styles.heading}>What is the title of your new deck?</Text>
 			</View>
 
-			<Button title='Create Deck' onPress={addDeck} color='black' />
+			<View>
+				<TextInput
+					style={styles.textInput}
+					onChangeText={text => setDeckTitle(text)}
+					onFocus={() => setError(false)}
+					placeholder='Deck Title'
+					autoCapitalize='words'
+					value={deckTitle}
+				/>
+				{error && <Text style={{ color: 'red', fontWeight: 'bold' }}>Title cannot be empty</Text>}
+			</View>
+
+			<View style={{ position: 'relative', top: '60%' }}>
+				<TouchableOpacity style={styles.button} onPress={submit}>
+					<Text style={styles.buttonText}>Create Deck</Text>
+				</TouchableOpacity>
+			</View>
 		</KeyboardAvoidingView>
 	);
 }
 
 const styles = StyleSheet.create({
 	layout: {
-		display: 'flex',
-		height: '100vh',
-		flexDirection: 'column',
-		alignContent: 'space-between'
+		flex: 1,
+		padding: 20
 	},
-	textField: {
-		//
+	heading: {
+		textAlign: 'center',
+		fontSize: 36
+	},
+	textInput: {
+		height: 40,
+		borderColor: 'gray',
+		borderWidth: 1,
+		padding: 5
+	},
+	button: {
+		padding: 20,
+		borderRadius: 7,
+		backgroundColor: 'darkslategray'
+	},
+	buttonText: {
+		color: 'white',
+		fontSize: 22,
+		textAlign: 'center'
 	}
 });
 
