@@ -8,6 +8,10 @@ This project was bootstrapped with [Create React Native App](https://reactnative
 
 In the project directory, you can run:
 
+### `yarn install`
+
+Install all the project dependencies (run this first)
+
 ### `yarn start`
 
 Launch a development server. Expo Go is recommended to test drive.
