@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 	},
 	deckPreview: {
 		width: '100%',
-		backgroundColor: 'darkslategray'
+		backgroundColor: 'white'
 	}
 });
 

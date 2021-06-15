@@ -60,10 +60,10 @@ const styles = StyleSheet.create({
 		fontSize: 36
 	},
 	textInput: {
-		height: 40,
+		fontSize: 30,
 		borderColor: 'gray',
 		borderWidth: 1,
-		padding: 5
+		padding: 10
 	},
 	button: {
 		padding: 20,

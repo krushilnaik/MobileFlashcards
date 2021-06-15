@@ -15,7 +15,6 @@ function Quiz() {
 
 	// @ts-ignore
 	const deck = useSelector(state => state.decks[id]);
-	console.log('params:', route.params);
 
 	// @ts-ignore
 	const quiz = useSelector(state => state.quiz[id]);
@@ -98,7 +97,10 @@ function Quiz() {
 					<Text style={styles.buttonText}>Correct</Text>
 				</TouchableOpacity>
 
-				<TouchableOpacity style={[styles.button, { backgroundColor: 'coral' }]} onPress={() => submit()}>
+				<TouchableOpacity
+					style={[styles.button, { backgroundColor: 'crimson' }]}
+					onPress={() => submit()}
+				>
 					<Text style={styles.buttonText}>Incorrect</Text>
 				</TouchableOpacity>
 			</View>
