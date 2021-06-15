@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { addCardToDeck, saveDeckTitle, removeDeck, fetchDecks } from '../../util/api';
 
-export const deckReducer = createSlice({
+const deckReducer = createSlice({
 	name: 'decks',
 	initialState: null,
 	reducers: {
