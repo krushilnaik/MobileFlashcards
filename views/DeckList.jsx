@@ -1,7 +1,5 @@
-// import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
-// import { Card } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import DeckPreview from '../components/DeckPreview';
 import { getDecksAsync } from '../store/reducers/deck.reducer';
@@ -9,7 +7,6 @@ import { getDecksAsync } from '../store/reducers/deck.reducer';
 function DeckList() {
 	// @ts-ignore
 	const decks = useSelector(state => state.decks);
-	// const navigation = useNavigation();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
