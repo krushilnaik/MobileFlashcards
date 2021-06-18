@@ -1,6 +1,8 @@
 Flashcard app for the diehard academics (that's a compliment)
 
-## Tested on Android 10
+## Tested on Android 10 and Google Chrome
+
+-  Notiications don't work on web
 
 This project was bootstrapped with [Create React Native App](https://reactnative.dev/).
 
